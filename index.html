@@ -6,12 +6,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emotion Detector</title>
 
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2"></script>
     <script defer src="face-api.min.js"></script>
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
+    
 
 </head>
 <body>
-    <video id="video" width="720" height="560" autoplay muted></video>
+    <section class="textsec">
+        <p1>it seems that you're feeling</p1>
+       
+        <h2 class = "happy">
+            happy</h2>
+        <h2 class = "sad">
+            sad</h2>
+        <h2 class = "angry">
+            angry</h2>
+        <h2 class = "surprised">
+            surprised</h2>
+        <h2 class = "neutral">
+            neutral</h2>
+    </section>
+
+    <div id="particles-js"></div>
+    <video id="video" width="260" height="187" autoplay muted></video>
+
+    <section class="suggestsec">
+        <p1>maybe you should</p1>
+        
+        <h3 class = "happy">
+            share your joy with someone you care about!<br>
+            celebrate the moment—listen to your favorite upbeat song!</h3>
+        <h3 class = "sad">
+            take a deep breath. How about watching something comforting or calling a friend? <br>
+            consider journaling to express your thoughts—it might help :)</h3>
+        <h3 class = "angry">
+            channel your energy into something active, like a quick workout. <br>
+              consider writing down your thoughts to understand and release them.</h3>
+        <h3 class = "surprised">
+            take a moment to process—what surprised you today? <br>
+            reflect on how this unexpected twist makes you feel—excited, curious, or something else?</h3>
+        <h3 class = "neutral">
+            take this moment to relax—you're in a good state of balance.<br>
+            how about doing something small to brighten your day, like enjoying your favorite snack?</h3>
+    </section>
 </body>
 </html>
