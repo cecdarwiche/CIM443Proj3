@@ -31,11 +31,11 @@ video.addEventListener('play', () => {
       .withFaceLandmarks()
       .withFaceExpressions();
     
-    //const resizedDetections = faceapi.resizeResults(detections, displaySize);
-    //canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
-    //faceapi.draw.drawDetections(canvas, resizedDetections);
-    //faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
-    //faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
+    const resizedDetections = faceapi.resizeResults(detections, displaySize);
+    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+    faceapi.draw.drawDetections(canvas, resizedDetections);
+    faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
+    faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
 
     if (detections.length > 0) {
       // Get the first face's expressions
@@ -47,9 +47,10 @@ video.addEventListener('play', () => {
       );
 
       // Change background based on the detected emotion
+      
       changeBackground(dominantEmotion);
     }
-  }, 100);
+  }, 3000);
 });
 
 // Function to change the background based on emotion
@@ -71,7 +72,7 @@ function changeBackground(emotion) {
       emotion.style.display = "block"; 
     }
     updateSuggestion(emotion);
-    updateParticlesColor(emotion);
+    updateParticles(emotion);
   } else if (emotion == 'sad') {
     body.style.background = 'linear-gradient(to right, #a1c4fd, #c2e9fb)';
     let emotions = section.querySelectorAll("h2.sad");
@@ -79,7 +80,7 @@ function changeBackground(emotion) {
       emotion.style.display = "block"; 
     }
     updateSuggestion(emotion);
-    updateParticlesColor(emotion);
+    updateParticles(emotion);
   } else if (emotion == 'angry') {
     body.style.background = 'linear-gradient(to right, #f83600, #f9d423)';
     let emotions = section.querySelectorAll("h2.angry");
@@ -87,7 +88,7 @@ function changeBackground(emotion) {
       emotion.style.display = "block"; 
     }
     updateSuggestion(emotion);
-    updateParticlesColor(emotion);
+    updateParticles(emotion);
   } else if (emotion == 'surprised') {
     body.style.background = 'linear-gradient(to right, #ffecd2, #fcb69f)';
     let emotions = section.querySelectorAll("h2.surprised");
@@ -95,7 +96,7 @@ function changeBackground(emotion) {
       emotion.style.display = "block"; 
     }
     updateSuggestion(emotion);
-    updateParticlesColor(emotion);
+    updateParticles(emotion);
   } else if (emotion == 'neutral') {
     body.style.background = 'linear-gradient(to right, #bdc3c7, #2c3e50)';
     let emotions = section.querySelectorAll("h2.neutral");
@@ -103,7 +104,7 @@ function changeBackground(emotion) {
       emotion.style.display = "block"; 
     }
     updateSuggestion(emotion);
-    updateParticlesColor(emotion);
+    updateParticles(emotion);
     
   }
 }
@@ -118,19 +119,6 @@ function updateSuggestion(emotion) {
   const suggestionToShow = suggestSection.querySelector(`h3.${emotion}`);
   if (suggestionToShow) {
     suggestionToShow.style.display = 'block';
-  }
-  const waveBg = document.querySelector(".wave-bg");
-  // Optionally, update the background color for the emotion
-  if (emotion === 'happy') {
-    body.style.background = 'linear-gradient(to right, #ff9a9e, #fad0c4)';
-  } else if (emotion === 'sad') {
-    body.style.background = 'linear-gradient(to right, #a1c4fd, #c2e9fb)';
-  } else if (emotion === 'angry') {
-    body.style.background = 'linear-gradient(to right, #f83600, #f9d423)';
-  } else if (emotion === 'surprised') {
-    body.style.background = 'linear-gradient(to right, #ffecd2, #fcb69f)';
-  } else if (emotion === 'neutral') {
-    body.style.background = 'linear-gradient(to right, #bdc3c7, #2c3e50)';
   }
 }
 
@@ -192,20 +180,29 @@ tsParticles.load("particles-js", {
   },
 });
 
-function updateParticlesColor(emotion) {
-  const emotionColors = {
-      happy: "#FFD700", // Gold
-      sad: "#1E90FF", // Dodger Blue
-      angry: "#FF4500", // Orange Red
-      surprised: "#FF69B4", // Hot Pink
-      neutral: "#808080", // Gray
-  };
 
-  tsParticles.load("particles-js", {
-      particles: {
-          color: { value: emotionColors[emotion] || "#ffffff" },
-      },
-  });
+
+//countdown
+
+let countdownTime = 3; // Initial countdown time in seconds
+
+// Function to start the countdown
+function startCountdown() {
+  const countdownElement = document.getElementById('countdown');
+
+  const interval = setInterval(() => {
+    countdownElement.textContent = countdownTime; // Update the displayed time
+    countdownTime--;
+
+    if (countdownTime <= 0) {
+      clearInterval(interval); // Stop the countdown when it reaches 0
+      countdownTime = 3; // Reset the countdown
+      startCountdown(); // Start a new countdown
+    }
+  }, 1000); // Update every second
 }
 
+
+// Start the initial countdown
+startCountdown();
 
